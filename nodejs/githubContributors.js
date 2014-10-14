@@ -20,12 +20,6 @@
 var https = require('https');
 var http = require('http');
 
-// This must match the name of the RISCOSSPlatformCode.DataCollector object
-var COLLECTOR_ID = "GithubContributors";
-
-// One of [ NUMBER, EVIDENCE, DISTRIBUTION ]
-var COLLECTOR_DATATYPE = "NUMBER";
-
 var makeReq = function (project, callback) {
     https.request({
         host: 'api.github.com',
@@ -45,22 +39,7 @@ var makeReq = function (project, callback) {
 
 var run = function (conf) {
     makeReq(conf.githubProject, function (count) {
-        var req = http.request({
-            method: 'POST',
-            host: conf.riscoss_rdrHost,
-            port: conf.riscoss_rdrPort,
-            path: conf.riscoss_rdrPath,
-        }, function (response) {
-            console.log('ok');
-        });
-        req.end(JSON.stringify([
-            {
-                id: COLLECTOR_ID,
-                type: COLLECTOR_DATATYPE,
-                target: conf.riscoss_targetName,
-                value: count
-            }
-        ]));
+        console.log(count);
     });
 };
 
