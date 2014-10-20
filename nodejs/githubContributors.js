@@ -18,7 +18,9 @@
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
 var https = require('https');
-var http = require('http');
+
+var COLLECTOR_ID = 'GithubContributors';
+var DATA_TYPE = 'NUMBER';
 
 var makeReq = function (project, callback) {
     https.request({
@@ -39,7 +41,9 @@ var makeReq = function (project, callback) {
 
 var run = function (conf) {
     makeReq(conf.githubProject, function (count) {
-        console.log(count);
+        console.log('-----BEGIN RISK DATA-----');
+        console.log(JSON.stringify([{value:count, type:DATA_TYPE, id:COLLECTOR_ID}]));
+        console.log('-----END RISK DATA-----');
     });
 };
 

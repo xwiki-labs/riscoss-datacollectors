@@ -22,72 +22,48 @@ package eu.riscoss.datacollectors;
 import org.json.JSONObject;
 import org.json.JSONArray;
 import org.apache.commons.io.IOUtils;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.client.HttpClient;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import java.io.InputStreamReader;
-import java.io.BufferedReader;
-
 
 public class ExampleDataCollector
 {
     private static final String COLLECTOR_ID = "ExampleDataCollector";
     private static final String COLLECTOR_DATATYPE = "NUMBER";
 
-    private static int getData(String exampleParameter)
+    private static String getData(JSONObject input)
     {
-        return 42;
+        String exampleParameter = input.getString("exampleParameter");
+        return ""+42;
     }
 
-    private static String mkPost(int value, JSONObject input)
+    private static JSONObject testInput()
     {
-        JSONObject post = new JSONObject();
-        post.put("id", COLLECTOR_ID);
-        post.put("type", COLLECTOR_DATATYPE);
-        post.put("target", input.getString("riscoss_targetName"));
-        post.put("value", value);
-
-        JSONArray out = new JSONArray();
-        out.put(post);
-        return out.toString();
-    }
-
-    private static void uploadToRDR(int value, JSONObject input) throws Exception
-    {
-        HttpClient client = HttpClientBuilder.create().build();
-        String host = input.getString("riscoss_rdrHost");
-        int port = input.getInt("riscoss_rdrPort");
-        String path = input.getString("riscoss_rdrPath");
-
-        HttpPost request = new HttpPost("http://" + host + ":" + port + "" + path);
-        request.setEntity(new StringEntity(mkPost(value, input)));
-
-        HttpResponse response = client.execute(request);
-
-        System.out.println("Response Code : " 
-                      + response.getStatusLine().getStatusCode());
-
-        BufferedReader rd = new BufferedReader(
-	        new InputStreamReader(response.getEntity().getContent()));
-
-        StringBuffer result = new StringBuffer();
-        String line = "";
-        while ((line = rd.readLine()) != null) {
-	          System.err.println(line);
-        }
+        JSONObject input = new JSONObject("");
+        input.put("exampleParameter", "hi");
+        input.put("riscoss_targetName", "test");
+        return input;
     }
 
     public static void main(String[] args) throws Exception
     {
-        String stdin = IOUtils.toString(System.in, "UTF-8");
-        JSONObject input = new JSONObject(stdin);
+        JSONObject input;
+        if (args.length > 0 && "--stdin-conf".equals(args[args.length-1])) {
+            String stdin = IOUtils.toString(System.in, "UTF-8");
+            input = new JSONObject(stdin);
+        } else {
+            input = testInput();
+            System.out.println("using " + input + " as test configuration.");
+            System.out.println("In production, use --stdin-conf and pass configuration to stdin");
+        }
 
-        String exampleParameter = input.getString("exampleParameter");
+        JSONObject outObj = new JSONObject();
+        outObj.put("id", COLLECTOR_ID);
+        outObj.put("type", COLLECTOR_DATATYPE);
+        outObj.put("target", input.getString("riscoss_targetName"));
+        outObj.put("value", getData(input));
 
-        int value = getData(exampleParameter);
-
-        uploadToRDR(value, input);
+        JSONArray outArray = new JSONArray();
+        outArray.put(outObj);
+        System.out.println("-----BEGIN RISK DATA-----");
+        System.out.println(outArray.toString());
+        System.out.println("-----END RISK DATA-----");
     }
 }
