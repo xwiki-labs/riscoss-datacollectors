@@ -1,0 +1,7 @@
+{
+    "name": "riscoss-fossology-ow2",
+    "version": "0.0.0",
+    "dependencies": {
+        "jsdom": "~1.3.1"
+    }
+}
