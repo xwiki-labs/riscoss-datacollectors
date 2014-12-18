@@ -1,0 +1,91 @@
+{
+  "Files_No_License": {
+    "type": "NUMBER",
+    "value": 0
+  },
+  "No_Files": {
+    "type": "NUMBER",
+    "value": 0
+  },
+  "Blocker_Issue": {
+    "type": "NUMBER",
+    "value": 0
+  },
+  "Critical_Issue": {
+    "type": "NUMBER",
+    "value": 0
+  },
+  "Test_Coverage": {
+    "type": "NUMBER",
+    "value": 0
+  },
+  "Test_Success": {
+    "type": "NUMBER",
+    "value": 0
+  },
+  "omm_ENV": {
+    "type": "NUMBER",
+    "value": 0
+  },
+  "omm_PDOC": {
+    "type": "NUMBER",
+    "value": 0
+  },
+  "omm_CM": {
+    "type": "NUMBER",
+    "value": 0
+  },
+  "omm_LCS": {
+    "type": "NUMBER",
+    "value": 0
+  },
+  "omm_STK": {
+    "type": "NUMBER",
+    "value": 0
+  },
+  "omm_MST": {
+    "type": "NUMBER",
+    "value": 0
+  },
+  "omm_PP": {
+    "type": "NUMBER",
+    "value": 0
+  },
+  "omm_STD": {
+    "type": "NUMBER",
+    "value": 0
+  },
+  "omm_DFCT": {
+    "type": "NUMBER",
+    "value": 0
+  },
+  "omm_QTP": {
+    "type": "NUMBER",
+    "value": 0
+  },
+  "omm_RDMP": {
+    "type": "NUMBER",
+    "value": 0
+  },
+  "omm_REQM": {
+    "type": "NUMBER",
+    "value": 0
+  },
+  "Project_Activity": {
+    "type": "NUMBER",
+    "value": 0
+  },
+  "Number_Contribs": {
+    "type": "NUMBER",
+    "value": 0
+  },
+  "Number_Devs": {
+    "type": "NUMBER",
+    "value": 0
+  },
+  "Activity_Ratio": {
+    "type": "NUMBER",
+    "value": 0
+  }
+}
+

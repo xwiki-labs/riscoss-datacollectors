@@ -1,3 +1,3 @@
-# Example RISCOSS data collectors
+# RISCOSS Data Collectors
 
-For use with the RISCOSS Data Collector Manager
+This is a "crap repository" for work-in-progress DataCollectors for the riscoss project.
